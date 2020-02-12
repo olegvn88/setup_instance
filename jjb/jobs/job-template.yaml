@@ -1,0 +1,49 @@
+#template for Jenkins Job
+
+- job-template:
+    name: '{project_name}-{tool_name}-release'
+    description: '{description}'
+    project-type: '{project_type}'
+    concurrent: '{concurrent}'
+
+    #GitHub project
+    properties:
+     - github:
+        url: '{github_url}'
+
+    #This project is parameterized
+#    parameters:
+#     - string:
+#        name: '{string_name}'
+#        default: '{default_value}'
+
+      # Label Expression
+#    node: '{node_label}'
+
+    #Build
+    builders:
+     - '{shell_script}'
+
+    #Source Code Management
+    scm:
+     - git:
+        url: '{github_url}'
+        credentials-id: '{credentials_id}'
+        script-path: '{script_path}'
+        branches:
+         - '*/{branch}'
+        wipe-workspace: '{wipe_workspace}'
+
+    triggers:
+      - github
+
+    #pre-build conditions / Build Environment
+    wrappers:
+     - '{delete_workspace}'
+
+    #Post-build Actions
+    publishers:
+     - archive:
+        artifacts: '{artifacts}'
+     - description-setter:
+        regexp: 'Building oshinko-cli version: (.*)'

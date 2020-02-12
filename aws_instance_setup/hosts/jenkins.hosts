@@ -1,0 +1,14 @@
+[inventory]
+#18.189.43.82
+18.220.227.14
+
+[all:vars]
+# need optional repo for maven
+redhat_repos=["rhel-7-server-rpms", "rhel-7-server-optional-rpms", "rhel-7-server-extras-rpms"]
+
+ansible_ssh_user=ec2-user
+ansible_ssh_user=ec2-user
+system_user_private_key_file=keys/id_rsa
+
+
+

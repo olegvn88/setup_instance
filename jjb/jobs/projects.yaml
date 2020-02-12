@@ -1,0 +1,49 @@
+- project:
+    name: maven-project-releases
+    jobs:
+      - '{project_name}-{tool_name}-release':
+            project_name: maven
+            tool_name: project
+            description: ''
+            project_type: freestyle
+#            node_label: cli-release
+            github_url: https://github.com/olegvn88/oraclecertpreparecom.git/
+#            string_name: VERSION
+#            default_value: v0.3.1
+            shell_script: releases_script
+            branch: master
+            credentials_id: null
+            script_path: Jenkinsfile
+            concurrent: false
+            quiet_period: null
+            retry_count: null
+#            webhook: true
+            wipe_workspace: false
+            delete_workspace: workspace-cleanup
+            lightweight_checkout: true
+            artifacts: 'artifact'
+
+- builder:
+   name: releases_script
+   builders:
+    - shell:  |
+           echo Hello
+
+- view:
+   name: release
+   view-type: list
+   description: ''
+   filter-executors: true
+   filter-queue: true
+   job-name:
+    - maven-project-release
+   columns:
+    - status
+    - weather
+    - job
+    - last-success
+    - last-failure
+    - last-duration
+    - build-button
+
+
